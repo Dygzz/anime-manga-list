@@ -4,6 +4,7 @@ import List from '../components/List'
 import ChooseList from '../components/ChooseList'
 import { getAnimeList } from '../services/animeServices'
 import { getMangaList } from '../services/mangaServices'
+import { deleteFavorite } from '../services/favoriteServices'
 
 const Home = () => {
   const [anime, setAnime] = useState([])
@@ -31,6 +32,7 @@ const Home = () => {
       <List
         myList={isAnime ? anime : mangas}
         type={isAnime ? 'anime' : 'manga'}
+        forChange={deleteFavorite}
       />
     </DivContainer>
   )

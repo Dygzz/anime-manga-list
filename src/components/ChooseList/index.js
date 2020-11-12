@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const ChooseList = props => {
+  const [isOneFocus, setIsOneFocus] = useState(true)
+
   return (
     <DivContainer>
-      <Button onClick={props.funcOne}>{props.textOne}</Button>
-      <Button onClick={props.funcTwo}>{props.textTwo}</Button>
+      <Button
+        onClick={() => {
+          props.funcOne()
+          setIsOneFocus(true)
+        }}
+        color={isOneFocus ? '#f3d8c7' : '#39393a'}
+        backgroundColor={isOneFocus ? '#39393a' : '#f3d8c7'}
+      >
+        {props.textOne}
+      </Button>
+      <Button
+        onClick={() => {
+          props.funcTwo()
+          setIsOneFocus(false)
+        }}
+        color={isOneFocus ? '#39393a' : '#f3d8c7'}
+        backgroundColor={isOneFocus ? '#f3d8c7' : '#39393a'}
+      >
+        {props.textTwo}
+      </Button>
     </DivContainer>
   )
 }
@@ -21,16 +41,13 @@ ChooseList.propTypes = {
 const DivContainer = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-top: 10px;
 `
 const Button = styled.button`
-  background-color: #f3d8c7;
+  background-color: ${props => props.backgroundColor};
   width: 40%;
   border: none;
-  color: #39393a;
-  &:hover {
-    background-color: #39393a;
-    color: #f3d8c7;
-  }
+  color: ${props => props.color};
   &:focus {
     outline: none;
   }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getOneAnime } from '../services/animeServices'
-import AnimeDetails from '../components/AnimeDetails'
-import { Link } from 'react-router-dom'
+import Details from '../components/Details'
 
 const Anime = props => {
   const [anime, setAnime] = useState('')
@@ -13,15 +12,12 @@ const Anime = props => {
   }, [])
 
   return (
-    <div>
-      <Link to='/'> return anime</Link>
-      <AnimeDetails
-        title={anime.title}
-        episode={anime.episodes}
-        description={anime.synopsis}
-        src={anime.image_url}
-      />
-    </div>
+    <Details
+      title={anime.title}
+      descriptionSpan={"Nombre d'episode: " + anime.episodes}
+      description={anime.synopsis}
+      src={anime.image_url}
+    />
   )
 }
 
