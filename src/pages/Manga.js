@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { getOneManga } from '../services/mangaServices'
-import { Link } from 'react-router-dom'
-import AnimeDetails from '../components/AnimeDetails'
+import Details from '../components/Details'
 
 const Manga = props => {
   const [manga, setManga] = useState('')
-  console.log(manga)
   useEffect(() => {
     // eslint-disable-next-line react/prop-types
     getOneManga(props.match.params.id).then(r => {
@@ -14,15 +12,16 @@ const Manga = props => {
     })
   }, [])
   return (
-    <div>
-      <Link to='/'> return anime</Link>
-      <AnimeDetails
-        title={manga.title}
-        episode={0}
-        description={manga.synopsis}
-        src={manga.image_url}
-      />
-    </div>
+    <Details
+      title={manga.title}
+      descriptionSpan={
+        manga.volumes !== null
+          ? 'Nombre de Volumes: ' + manga.volumes
+          : 'Nombre de volume inconnu'
+      }
+      description={manga.synopsis}
+      src={manga.image_url}
+    />
   )
 }
 
