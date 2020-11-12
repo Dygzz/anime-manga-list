@@ -15,7 +15,7 @@ const AnimeDetails = props => {
 AnimeDetails.propTypes = {
   title: PropTypes.string,
   src: PropTypes.string,
-  episode: PropTypes.string,
+  episode: PropTypes.number,
   description: PropTypes.string
 }
 export default AnimeDetails

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import List from '../components/List'
+import ChooseList from '../components/ChooseList'
 import { getAnimeList } from '../services/animeServices'
 import { getMangaList } from '../services/mangaServices'
 
@@ -20,14 +21,16 @@ const Home = () => {
 
   return (
     <DivContainer>
-      <Title>Liste des nouveaux Anime</Title>
-      <div>
-        <button onClick={() => setIsAnime(true)}>Anime</button>
-        <button onClick={() => setIsAnime(false)}>Mangas</button>
-      </div>
+      <Title>{isAnime ? 'Liste des top Anime' : 'Liste des top Mangas'}</Title>
+      <ChooseList
+        funcOne={() => setIsAnime(true)}
+        funcTwo={() => setIsAnime(false)}
+        textOne='Anime'
+        textTwo='Mangas'
+      />
       <List
         myList={isAnime ? anime : mangas}
-        urlDetails={isAnime ? 'anime/' : 'manga/'}
+        type={isAnime ? 'anime' : 'manga'}
       />
     </DivContainer>
   )
@@ -36,6 +39,7 @@ const Home = () => {
 const DivContainer = styled.div``
 
 const Title = styled.h1`
+  margin: 0;
   text-align: center;
   color: #729ea1;
 `
