@@ -24,4 +24,10 @@ const favoriteExist = (id, type) => {
   return favorite.map(e => e.mal_id).indexOf(id) !== -1
 }
 
-export { addFavorite, deleteFavorite, favoriteExist }
+const getFavorites = type => {
+  return localStorage.getItem('favorite' + type)
+    ? JSON.parse(localStorage.getItem('favorite' + type))
+    : []
+}
+
+export { addFavorite, deleteFavorite, favoriteExist, getFavorites }

@@ -1,7 +1,11 @@
 import axios from 'axios'
 
-const getAnimeList = () => axios.get('https://api.jikan.moe/v3/top/anime')
+const getAnimeList = (index = 1) =>
+  axios.get(`https://api.jikan.moe/v3/top/anime/${index}`)
 
 const getOneAnime = id => axios.get(`https://api.jikan.moe/v3/anime/${id}`)
 
-export { getAnimeList, getOneAnime }
+const getCharactersAnime = id =>
+  axios.get(`https://api.jikan.moe/v3/anime/${id}/characters_staff`)
+
+export { getAnimeList, getOneAnime, getCharactersAnime }

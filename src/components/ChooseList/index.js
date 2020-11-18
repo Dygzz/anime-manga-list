@@ -12,8 +12,7 @@ const ChooseList = props => {
           props.funcOne()
           setIsOneFocus(true)
         }}
-        color={isOneFocus ? '#f3d8c7' : '#39393a'}
-        backgroundColor={isOneFocus ? '#39393a' : '#f3d8c7'}
+        backgroundColor={isOneFocus ? '#f3d8c7' : 'transparent'}
       >
         {props.textOne}
       </Button>
@@ -22,8 +21,7 @@ const ChooseList = props => {
           props.funcTwo()
           setIsOneFocus(false)
         }}
-        color={isOneFocus ? '#39393a' : '#f3d8c7'}
-        backgroundColor={isOneFocus ? '#f3d8c7' : '#39393a'}
+        backgroundColor={isOneFocus ? 'transparent' : '#f3d8c7'}
       >
         {props.textTwo}
       </Button>
@@ -45,9 +43,12 @@ const DivContainer = styled.div`
 `
 const Button = styled.button`
   background-color: ${props => props.backgroundColor};
-  width: 40%;
+  width: 30%;
+  font-weight: bold;
+  border-radius: 30px;
   border: none;
-  color: ${props => props.color};
+  padding: 5px 0;
+  color: #39393a;
   &:focus {
     outline: none;
   }
