@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ChooseList from '../components/ChooseList'
 import List from '../components/List'
 import styled from 'styled-components'
-import { deleteFavorite } from '../services/favoriteServices'
+import { deleteFavorite, getFavorites } from '../services/favoriteServices'
 
 const Favorite = () => {
   const [listFavorite, setListFavorite] = useState([])
@@ -10,16 +10,16 @@ const Favorite = () => {
 
   useEffect(() => {
     let type = isAnime ? 'anime' : 'manga'
-    setListFavorite(JSON.parse(localStorage.getItem('favorite' + type)))
+    setListFavorite(getFavorites(type))
   }, [])
 
   const handleChange = isManga => {
     if (isManga) {
       setIsAnime(false)
-      setListFavorite(JSON.parse(localStorage.getItem('favoritemanga')))
+      setListFavorite(getFavorites('manga'))
     } else {
       setIsAnime(true)
-      setListFavorite(JSON.parse(localStorage.getItem('favoriteanime')))
+      setListFavorite(getFavorites('anime'))
     }
   }
 

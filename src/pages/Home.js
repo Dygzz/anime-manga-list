@@ -10,7 +10,8 @@ const Home = () => {
   const [anime, setAnime] = useState([])
   const [mangas, setMangas] = useState([])
   const [isAnime, setIsAnime] = useState(true)
-  const [index, setIndex] = useState(2)
+  const [indexManga, setIndexManga] = useState(2)
+  const [indexAnime, setIndexAnime] = useState(2)
   const [errorMessage, setErrorMessage] = useState('')
   useEffect(() => {
     getMangaList()
@@ -26,23 +27,24 @@ const Home = () => {
     window.onscroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         if (isAnime) {
-          getAnimeList(index)
+          getAnimeList(indexAnime)
             .then(r => {
               setAnime(anime.concat(r.data.top))
+              setIndexAnime(indexAnime + 1)
             })
             .catch(() => {
               setErrorMessage("Il n' y a pas d' autre Anime")
             })
         } else {
-          getMangaList(index)
+          getMangaList(indexManga)
             .then(r => {
               setMangas(mangas.concat(r.data.top))
+              setIndexManga(indexManga + 1)
             })
             .catch(() => {
               setErrorMessage("Il n' y a pas d' autre Manga")
             })
         }
-        setIndex(index + 1)
       }
     }
   })
