@@ -11,6 +11,8 @@ Avatar.propTypes = {
 }
 const AvatarImg = styled.img`
   border: 1px solid #39393a;
+  height: auto;
+  width: 100%;
 `
 
 export default Avatar
