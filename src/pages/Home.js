@@ -10,6 +10,8 @@ const Home = () => {
   const [anime, setAnime] = useState([])
   const [mangas, setMangas] = useState([])
   const [isAnime, setIsAnime] = useState(true)
+  const [index, setIndex] = useState(2)
+  const [errorMessage, setErrorMessage] = useState('')
   useEffect(() => {
     getMangaList()
       .then(r => setMangas(r.data.top))
@@ -20,12 +22,43 @@ const Home = () => {
       .catch(err => console.log(err))
   }, [])
 
+  useEffect(() => {
+    window.onscroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (isAnime) {
+          getAnimeList(index)
+            .then(r => {
+              setAnime(anime.concat(r.data.top))
+            })
+            .catch(() => {
+              setErrorMessage("Il n' y a pas d' autre Anime")
+            })
+        } else {
+          getMangaList(index)
+            .then(r => {
+              setMangas(mangas.concat(r.data.top))
+            })
+            .catch(() => {
+              setErrorMessage("Il n' y a pas d' autre Manga")
+            })
+        }
+        setIndex(index + 1)
+      }
+    }
+  })
+
   return (
     <DivContainer>
       <Title>{isAnime ? 'Liste des top Anime' : 'Liste des top Mangas'}</Title>
       <ChooseList
-        funcOne={() => setIsAnime(true)}
-        funcTwo={() => setIsAnime(false)}
+        funcOne={() => {
+          setIsAnime(true)
+          setErrorMessage('')
+        }}
+        funcTwo={() => {
+          setIsAnime(false)
+          setErrorMessage('')
+        }}
         textOne='Anime'
         textTwo='Mangas'
       />
@@ -34,6 +67,7 @@ const Home = () => {
         type={isAnime ? 'anime' : 'manga'}
         forChange={deleteFavorite}
       />
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </DivContainer>
   )
 }
@@ -44,6 +78,10 @@ const Title = styled.h1`
   margin: 0;
   text-align: center;
   color: #729ea1;
+`
+
+const ErrorMessage = styled.p`
+  color: #ba5a31;
 `
 
 export default Home

@@ -25,7 +25,6 @@ const Favorite = () => {
 
   const handleChangeSuppFavorite = (id, type) => {
     deleteFavorite(id, type)
-    console.log(type)
     setListFavorite(JSON.parse(localStorage.getItem('favorite' + type)))
   }
   return (
